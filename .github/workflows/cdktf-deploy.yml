@@ -22,4 +22,4 @@ jobs:
 
       - name: Deploy CDKTF stack
         working-directory: database
-        run: npx cdktf deploy --auto-approve
+        run: cdktf deploy --auto-approve
