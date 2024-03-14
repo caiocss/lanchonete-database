@@ -9,17 +9,24 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
+        steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
 
       - name: Install dependencies
         working-directory: database
         run: npm install
 
-      - name: Deploy CDKTF stack
+      - name: Generate module and provider bindings
         working-directory: database
-        run: cdktf deploy --auto-approve
+        run: npx cdktf-cli get
+
+      - name: Run Terraform CDK (inside the database directory)
+        working-directory: database
+        run: npx cdktf-cli deploy --auto-approve
+        
