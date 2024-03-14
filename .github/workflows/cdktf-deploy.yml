@@ -22,10 +22,6 @@ jobs:
         working-directory: database
         run: npm install
 
-      - name: Generate module and provider bindings
-        working-directory: database
-        run: npx cdktf get
-
       - name: Run Terraform CDK (inside the database directory)
         working-directory: database
         run: npx cdktf deploy --auto-approve
