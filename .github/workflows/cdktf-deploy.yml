@@ -21,6 +21,10 @@ jobs:
         with: 
           node-version: 14
 
+      
+      - name: Install CDKTF CLI
+        run: npm install -g cdktf-cli
+
       - name: Install dependencies
         run: npm install
 
