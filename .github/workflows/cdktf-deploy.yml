@@ -24,9 +24,9 @@ jobs:
 
       - name: Generate module and provider bindings
         working-directory: database
-        run: npx cdktf-cli get
+        run: npx cdktf get
 
       - name: Run Terraform CDK (inside the database directory)
         working-directory: database
-        run: npx cdktf-cli deploy --auto-approve
+        run: npx cdktf deploy --auto-approve
         
