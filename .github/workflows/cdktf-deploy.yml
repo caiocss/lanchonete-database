@@ -9,7 +9,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: us-west-1
-
+ 
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,23 +18,30 @@ jobs:
         working-directory:   ./database
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js 18.x
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      
+          cache: "npm"
       - name: Install CDKTF CLI
         run: npm install -g cdktf-cli
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Install Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.1.7
 
-      - name: Run Terraform CDK
-        run: npx cdktf deploy --auto-approve
+      - name: Install dependencies
+        run: npm ci
+
+      # If you use providers or modules that are not pre-built, you can install them here
+      - name: Generate bindings for providers and modules
+        run: cdktf get
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Deploy
+        run: cdktf deploy --auto-approve '*' # Deploys all stacks
         
