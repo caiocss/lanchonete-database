@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory:   ./database
 
     steps:
       - name: Checkout code
@@ -15,14 +18,15 @@ jobs:
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
-        with:
+        with: 
           node-version: 14
 
       - name: Install dependencies
-        working-directory: database
         run: npm install
 
-      - name: Run Terraform CDK (inside the database directory)
-        working-directory: database
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Run Terraform CDK
         run: npx cdktf deploy --auto-approve
         
