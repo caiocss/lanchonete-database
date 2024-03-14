@@ -1,7 +1,7 @@
 name: Deploy database
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
