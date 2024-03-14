@@ -7,23 +7,24 @@
     constructor(scope: Construct, id: string) {
       super(scope, id);
 
-      // define resources here
-
+      // define provider
       new AwsProvider(this, "aws", {
-        region: "us-west-1", // Set your desired region
+        region: "us-west-1",
       });
-  
+
+
+      // create database in rds
       const dbInstance = new DbInstance(this, "lanchonete-database", {
-        allocatedStorage: 10, // Set storage size in GB
+        allocatedStorage: 10,
         engine: "postgres",
         engineVersion: "16",
         identifier: "lanchonete-db",
-        instanceClass: "db.t3.micro", // Choose an appropriate instance type
+        instanceClass: "db.t3.micro",
         dbName: "lanchonetedatabase",
         username: "myuser",
         password: "mypassword",
-        skipFinalSnapshot: true, // Set to true if you don't want a final snapshot
-        vpcSecurityGroupIds: ["sg-0baf026fe6c20e3f2"], // Specify your security group(s)
+        skipFinalSnapshot: true,
+        vpcSecurityGroupIds: ["sg-0baf026fe6c20e3f2"],
       });
       
   
