@@ -11,15 +11,24 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          cache: 'npm'  # Cache dependencies for faster builds
+
+      - name: Configure AWS credentials (if using AWS provider)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-west-1
 
       - name: Install dependencies
+        working-directory: database
         run: npm install
 
       - name: Deploy CDKTF stack
+        working-directory: database
         run: npx cdktf deploy --auto-approve
