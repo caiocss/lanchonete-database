@@ -47,4 +47,4 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy
-        run: cdktf deploy --auto-approve '*' # Deploys all stacks
+        run: cdktf deploy --auto-approve
