@@ -1,5 +1,5 @@
   import { Construct } from "constructs";
-  import { App, TerraformStack } from "cdktf";
+  import { App, TerraformOutput, TerraformStack } from "cdktf";
   import { AwsProvider } from "@cdktf/provider-aws/lib/provider";
   import { DbInstance } from "@cdktf/provider-aws/lib/db-instance";
 
@@ -13,8 +13,8 @@
       });
 
 
-      // create database in rds
-      new DbInstance(this, "lanchonete-database", {
+      // create database in
+      const dbInstance = new DbInstance(this, "lanchonete-database", {
         allocatedStorage: 10,
         engine: "postgres",
         engineVersion: "16",
@@ -29,9 +29,9 @@
       
   
       // Output the database endpoint
-      //new TerraformOutput(this, "dbEndpoint", {
-      //  value: dbInstance.endpoint
-      //})
+      new TerraformOutput(this, "dbEndpoint", {
+        value: dbInstance.endpoint
+      })
     }
   }
 
