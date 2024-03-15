@@ -1,5 +1,5 @@
   import { Construct } from "constructs";
-  import { App, TerraformOutput, TerraformStack } from "cdktf";
+  import { App, TerraformStack } from "cdktf";
   import { AwsProvider } from "@cdktf/provider-aws/lib/provider";
   import { DbInstance } from "@cdktf/provider-aws/lib/db-instance";
 
@@ -14,7 +14,7 @@
 
 
       // create database in rds
-      const dbInstance = new DbInstance(this, "lanchonete-database", {
+      new DbInstance(this, "lanchonete-database", {
         allocatedStorage: 10,
         engine: "postgres",
         engineVersion: "16",
