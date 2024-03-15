@@ -13,6 +13,7 @@
         region: process.env.AWS_DEFAULT_REGION,
       });
 
+      const vpcSecurityGroupId = process.env.VPC_SECURITY_GROUP_ID;
 
       // create database in
       const dbInstance = new DbInstance(this, "lanchonete-database", {
@@ -25,7 +26,7 @@
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         skipFinalSnapshot: true,
-        vpcSecurityGroupIds: ["sg-035a195544747abcc"],
+        vpcSecurityGroupIds: [vpcSecurityGroupId ?? ""],
       });
 
 
