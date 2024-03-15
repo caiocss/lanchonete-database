@@ -1,9 +1,11 @@
 name: Deploy database
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+    paths:
+      - 'main.ts'
  
 jobs:
   deploy:
