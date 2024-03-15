@@ -45,4 +45,8 @@ jobs:
 
       - name: Deploy
         run: cdktf deploy --auto-approve '*' # Deploys all stacks
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.GITHUB_TOKEN.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.GITHUB_TOKEN.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-1
         
