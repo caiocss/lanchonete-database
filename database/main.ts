@@ -29,9 +29,9 @@
       
   
       // Output the database endpoint
-      new TerraformOutput(this, "dbEndpoint", {
-        value: dbInstance.endpoint
-      })
+      //new TerraformOutput(this, "dbEndpoint", {
+      //  value: dbInstance.endpoint
+      //})
     }
   }
 
