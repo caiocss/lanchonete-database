@@ -43,6 +43,14 @@ jobs:
       - name: Run Tests
         run: npm test
 
+      
+      - name: My secrets
+        run: echo "My secret is $AWS_ACCESS_KEY_ID"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-west-1
+
       - name: Deploy
         run: cdktf deploy --auto-approve '*' # Deploys all stacks
         env:
