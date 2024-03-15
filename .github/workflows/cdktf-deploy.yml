@@ -11,7 +11,7 @@ jobs:
     defaults:
       run:
         working-directory: database
-
+     
     steps:
       - uses: actions/checkout@v3
 
@@ -49,3 +49,7 @@ jobs:
 
       - name: Deploy
         run: cdktf deploy --auto-approve
+        env:
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  
