@@ -35,6 +35,7 @@
         name: "/database/user",
         type: "String",
         value: process.env.DB_USER,
+        overwrite: true,
       });
 
       // Save Database address with port
@@ -42,6 +43,7 @@
         name: "/database/address",
         type: "String",
         value: dbInstance.endpoint,
+        overwrite: true,
       });
 
 
@@ -50,6 +52,7 @@
         name: "/database/password",
         type: "SecureString",
         value: process.env.DB_PASSWORD,
+        overwrite: true,
       });
       
   
