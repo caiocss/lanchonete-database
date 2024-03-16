@@ -4,7 +4,7 @@
   import { DbInstance } from "@cdktf/provider-aws/lib/db-instance";
   import { SsmParameter } from "@cdktf/provider-aws/lib/ssm-parameter";
 
-  
+
   class MyStack extends TerraformStack {
     constructor(scope: Construct, id: string) {
       super(scope, id);
@@ -16,7 +16,7 @@
 
       const vpcSecurityGroupId = process.env.VPC_SECURITY_GROUP_ID;
 
-      // create database in
+      // create database
       const dbInstance = new DbInstance(this, "lanchonete-database", {
         allocatedStorage: 10,
         engine: "postgres",
