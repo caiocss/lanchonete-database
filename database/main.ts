@@ -4,6 +4,7 @@
   import { DbInstance } from "@cdktf/provider-aws/lib/db-instance";
   import { SsmParameter } from "@cdktf/provider-aws/lib/ssm-parameter";
 
+  
   class MyStack extends TerraformStack {
     constructor(scope: Construct, id: string) {
       super(scope, id);
