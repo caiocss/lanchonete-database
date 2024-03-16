@@ -1,12 +1,12 @@
-name: deploy_database
+name: plan_database
 
 on:
-  push:
+  pull_request:
     branches:
       - main
  
 jobs:
-  deploy-terraform:
+  plan-terraform:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -47,8 +47,8 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }} 
 
-      - name: Deploy
-        run: cdktf deploy --auto-approve
+      - name: Plan
+        run: cdktf plan
         env:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
