@@ -3,6 +3,7 @@
   import { AwsProvider } from "@cdktf/provider-aws/lib/provider";
   import { DbInstance } from "@cdktf/provider-aws/lib/db-instance";
   import { SsmParameter } from "@cdktf/provider-aws/lib/ssm-parameter";
+  import { SecurityGroup } from "@cdktf/provider-aws/lib/security-group";
 
 
   class MyStack extends TerraformStack {
@@ -16,6 +17,12 @@
 
       const vpcSecurityGroupId = process.env.VPC_SECURITY_GROUP_ID;
 
+      // create security group
+      const dbSecurityGroup = new SecurityGroup(this, 'dbSecurityGroup', {
+        vpcId: vpcSecurityGroupId,
+        description: 'Security group for lanchonete database',
+      });
+
       // create database
       const dbInstance = new DbInstance(this, "lanchonete-database", {
         allocatedStorage: 10,
@@ -27,7 +34,7 @@
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         skipFinalSnapshot: true,
-        vpcSecurityGroupIds: [vpcSecurityGroupId ?? ""],
+        vpcSecurityGroupIds: [dbSecurityGroup.id ?? ""],
       });
 
 
