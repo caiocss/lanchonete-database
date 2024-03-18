@@ -15,7 +15,7 @@
         region: process.env.AWS_DEFAULT_REGION,
       });
 
-      const vpcId = "vpc-017f3428914648872"
+      const vpcId = process.env.VPC_SECURITY_GROUP_ID;
 
       // create security group
       const dbSecurityGroup = new SecurityGroup(this, 'dbSecurityGroup', {
