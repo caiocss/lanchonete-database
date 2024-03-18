@@ -63,7 +63,7 @@
       });
 
       // Save Database hostname
-      new SsmParameter(this, "dbAddress", {
+      new SsmParameter(this, "dbHostname", {
         name: "/database/hostname",
         type: "String",
         value: dbInstance.endpoint.split(":")[0],
@@ -71,7 +71,7 @@
       });
 
       // Save Database port
-      new SsmParameter(this, "dbAddress", {
+      new SsmParameter(this, "dbPort", {
         name: "/database/port",
         type: "String",
         value: dbInstance.endpoint.split(":")[1],
