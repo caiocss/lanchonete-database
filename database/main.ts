@@ -40,7 +40,6 @@
         identifier: "lanchonete-db",
         instanceClass: "db.t3.micro",
         dbName: "lanchonetedatabase",
-        publiclyAccessible: true,
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         skipFinalSnapshot: true,
