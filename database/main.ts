@@ -74,7 +74,7 @@
       new SsmParameter(this, "dbPort", {
         name: "/database/port",
         type: "String",
-        value: dbInstance.endpoint.split(":")[1],
+        value: dbInstance.port.toString(),
         overwrite: true,
       });
   
