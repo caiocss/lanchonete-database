@@ -21,6 +21,14 @@
       const dbSecurityGroup = new SecurityGroup(this, 'dbSecurityGroup', {
         vpcId: vpcSecurityGroupId,
         description: 'Security group for lanchonete database',
+        ingress: [
+          {
+            fromPort: 5432,
+            toPort: 5432,
+            protocol: 'tcp',
+            cidrBlocks: ['0.0.0.0/0']
+          },
+        ],
       });
 
       // create database
@@ -46,15 +54,6 @@
         overwrite: true,
       });
 
-      // Save Database address with port
-      new SsmParameter(this, "dbAddress", {
-        name: "/database/address",
-        type: "String",
-        value: dbInstance.endpoint,
-        overwrite: true,
-      });
-
-
       // Save Database password
       new SsmParameter(this, "dbPassword", {
         name: "/database/password",
@@ -62,7 +61,22 @@
         value: process.env.DB_PASSWORD,
         overwrite: true,
       });
-      
+
+      // Save Database hostname
+      new SsmParameter(this, "dbHostname", {
+        name: "/database/hostname",
+        type: "String",
+        value: dbInstance.endpoint.split(":")[0],
+        overwrite: true,
+      });
+
+      // Save Database port
+      new SsmParameter(this, "dbPort", {
+        name: "/database/port",
+        type: "String",
+        value: dbInstance.port.toString(),
+        overwrite: true,
+      });
   
       // Output the database endpoint
       new TerraformOutput(this, "dbEndpoint", {
