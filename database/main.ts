@@ -15,11 +15,11 @@
         region: process.env.AWS_DEFAULT_REGION,
       });
 
-      const vpcSecurityGroupId = process.env.VPC_SECURITY_GROUP_ID;
+      const vpcId = "vpc-017f3428914648872"
 
       // create security group
       const dbSecurityGroup = new SecurityGroup(this, 'dbSecurityGroup', {
-        vpcId: vpcSecurityGroupId,
+        vpcId: vpcId,
         name: 'lanchonete-database-sg',
         description: 'Security group for lanchonete database',
         ingress: [
@@ -43,7 +43,7 @@
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         skipFinalSnapshot: true,
-        vpcSecurityGroupIds: [dbSecurityGroup.id ?? ""],
+        vpcSecurityGroupIds: [dbSecurityGroup.id],
       });
 
 
