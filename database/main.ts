@@ -20,6 +20,7 @@
       // create security group
       const dbSecurityGroup = new SecurityGroup(this, 'dbSecurityGroup', {
         vpcId: vpcSecurityGroupId,
+        name: 'lanchonete-database-sg',
         description: 'Security group for lanchonete database',
         ingress: [
           {
@@ -39,6 +40,7 @@
         identifier: "lanchonete-db",
         instanceClass: "db.t3.micro",
         dbName: "lanchonetedatabase",
+        publiclyAccessible: true,
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         skipFinalSnapshot: true,
