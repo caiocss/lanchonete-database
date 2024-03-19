@@ -42,6 +42,7 @@
         dbName: "lanchonetedatabase",
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
+        publiclyAccessible: true,
         skipFinalSnapshot: true,
         vpcSecurityGroupIds: [dbSecurityGroup.id],
       });
