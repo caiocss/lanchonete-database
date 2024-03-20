@@ -20,14 +20,14 @@ class MyStack extends TerraformStack {
       region: process.env.AWS_DEFAULT_REGION,
     });
 
-    const vpc = new Vpc(this, 'vpc', {
+    const vpc = new Vpc(this, 'db-vpc', {
       cidrBlock: '10.0.0.0/16',
       tags: {
         Name: 'database-vpc',
       },
     });
 
-    const internetGateway = new InternetGateway(this, 'internetGateway', {
+    const internetGateway = new InternetGateway(this, 'dbInternetGateway', {
       tags: {
         Name: 'database-internet-gateway',
       },
@@ -43,12 +43,18 @@ class MyStack extends TerraformStack {
       vpcId: vpc.id,
       cidrBlock: '10.0.1.0/24',
       availabilityZone: 'us-east-1a',
+      tags: {
+        Name: 'database-internet-gateway',
+      },
     });
 
     const subnet2 = new Subnet(this, 'subnet2', {
       vpcId: vpc.id,
       cidrBlock: '10.0.2.0/24',
       availabilityZone: 'us-east-1c',
+      tags: {
+        Name: 'database-internet-gateway',
+      },
     });
 
     // create DB subnet group
