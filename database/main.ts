@@ -22,6 +22,8 @@ class MyStack extends TerraformStack {
 
     const vpc = new Vpc(this, 'db-vpc', {
       cidrBlock: '10.0.0.0/16',
+      enableDnsSupport: true,
+      enableDnsHostnames: true,
       tags: {
         Name: 'database-vpc',
       },
