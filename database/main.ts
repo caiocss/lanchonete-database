@@ -46,16 +46,16 @@ class MyStack extends TerraformStack {
       cidrBlock: '10.0.1.0/24',
       availabilityZone: 'us-east-1a',
       tags: {
-        Name: 'database-internet-gateway',
+        Name: 'database-us-east-1a',
       },
     });
 
     const subnet2 = new Subnet(this, 'subnet2', {
       vpcId: vpc.id,
       cidrBlock: '10.0.2.0/24',
-      availabilityZone: 'us-east-1c',
+      availabilityZone: 'us-east-1b',
       tags: {
-        Name: 'database-internet-gateway',
+        Name: 'database-us-east-1b',
       },
     });
 
